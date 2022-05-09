@@ -6,12 +6,13 @@
 }
 
 :root {
-  --brand-green-hover: hsl(170, 100%, 14%);
+  --hue: 280;
 
-  --brand-green: hsl(170, 100%, 26%);
-  --brand-green-light: hsl(148, 23%, 89%);
-  --brand-green-light-02: hsl(180, 14%, 97%);
+  --brand-dark: hsl(var(--hue), 100%, 14%);
+  --brand: hsl(var(--hue), 100%, 26%);
+  --brand-light: hsl(calc(var(--hue) - 22), 23%, 89%);
   --brand-beige: hsl(39, 100%, 97%);
+  --background-light: hsl(180, 14%, 97%);
 
   --grey-headline: hsl(210, 11%, 15%);
   --grey-paragraph: hsl(210, 9%, 31%);
@@ -22,14 +23,18 @@
   font-size: 62.5%; /* 1rem = 10px */
 }
 
+img {
+  width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: overlay;
 }
 
@@ -38,7 +43,7 @@ body {
 
   font-size: 1.6rem;
   text-align: center;
-  background-color: var(--brand-green-light-02);
+  background-color: var(--background-light);
 }
 
 section:not(#home) {
@@ -66,8 +71,8 @@ section header h4 {
   line-height: 150%;
   letter-spacing: 0.08rem;
   text-transform: uppercase;
-  color: var(--brand-green);
-  
+  color: var(--brand);
+
   margin-bottom: 1.6rem;
 }
 
@@ -79,6 +84,61 @@ section .content p {
   color: var(--grey-paragraph);
 }
 
+.button {
+  background-color: var(--brand);
+
+  border: none;
+  border-radius: 4rem;
+
+  margin-bottom: 6rem;
+
+  padding: 1.6rem 3.2rem;
+  width: fit-content;
+
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+
+  transition: background 200ms;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+
+/*========== CUMTOM COLORS ==========*/
+#navigation .logo path[fill*='#00856F'],
+#backToTopButton svg circle {
+  fill: var(--brand);
+}
+
+#services .card svg circle {
+  fill: var(--brand-light);
+}
+
+button.open-menu path[stroke*='#00856F'],
+#contact li path {
+  stroke: var(--brand);
+}
+
+body.expanded-menu #navigation .logo path,
+#navigation.scroll .logo path {
+  fill: var(--white);
+}
+
+#navigation.scroll button.open-menu path[stroke*='#00856F'] {
+  stroke: var(--white);
+}
 
 /*========== NAVIGATION ==========*/
 nav {
@@ -99,15 +159,7 @@ nav .wrapper {
 }
 
 nav.scroll {
-  background-color: var(--brand-green);
-}
-
-nav.scroll .logo path {
-  fill: white;
-}
-
-nav.scroll button path {
-  stroke: white;
+  background-color: var(--brand);
 }
 
 nav button {
@@ -115,7 +167,6 @@ nav button {
   border: none;
   cursor: pointer;
 }
-
 
 /*========== EXPANDED-MENU ==========*/
 body.expanded-menu {
@@ -147,7 +198,7 @@ body.expanded-menu .menu {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--brand-green);
+  background-color: var(--brand);
 
   width: 100vw;
   height: 100vh;
@@ -182,9 +233,10 @@ body.expanded-menu .menu {
   line-height: 2.3rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--brand-green);
+  color: var(--brand);
 
   background-color: var(--white);
+  border: 1px solid var(--white);
   border-radius: 4rem;
   padding: 1.6rem 3.2rem;
   display: inline-block;
@@ -193,11 +245,11 @@ body.expanded-menu .menu {
   margin-bottom: 8rem;
 }
 
-.social-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3.2rem;
+.menu .button:hover {
+  background-color: var(--brand);
+  color: var(--white);
+
+  filter: brightness(1.15);
 }
 
 body.expanded-menu .logo,
@@ -214,13 +266,12 @@ body.expanded-menu .close-menu path {
   stroke: white;
 }
 
-
 /*========== HOME ==========*/
 #home::before {
   content: '';
-  background-color: var(--brand-green-light);
+  background-color: var(--brand-light);
   height: calc(108rem + var(--nav-height));
-  width: 100%;
+  width: 100vw;
   display: block;
 
   position: absolute;
@@ -229,7 +280,7 @@ body.expanded-menu .close-menu path {
   z-index: -1;
 }
 
-#home{
+#home {
   padding-top: calc(4.1rem + var(--nav-height));
 }
 
@@ -250,25 +301,12 @@ body.expanded-menu .close-menu path {
   margin-bottom: 3.2rem;
 }
 
-#home button {
-  background-color: var(--brand-green);
+#home .button {
+  margin-inline: auto;
+}
 
-  border: none;
-  border-radius: 4rem;
-
-  margin: 0 auto 6rem;
-  height: 5.2rem;
-  width: 26.3rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
-
-  color: var(--white);
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
+#home .button:hover {
+  background-color: var(--brand-dark);
 }
 
 #home img {
@@ -286,7 +324,7 @@ body.expanded-menu .close-menu path {
   margin-inline: auto;
 
   background-color: var(--brand-beige);
-  border: 1px solid var(--brand-green-light);
+  border: 1px solid var(--brand-light);
   border-radius: 0.6rem;
 
   display: flex;
@@ -305,9 +343,8 @@ body.expanded-menu .close-menu path {
 #home .stat p {
   font-size: 1.6rem;
   line-height: 150%;
-  color: var(--brand-green);
+  color: var(--brand);
 }
-
 
 /*========== SERVICES ==========*/
 #services header h2 {
@@ -326,13 +363,12 @@ body.expanded-menu .close-menu path {
   gap: 1.6rem;
 
   padding: 2.4rem;
-  border: 0.1rem solid var(--brand-green-light);
+  border: 0.1rem solid var(--brand-light);
   border-radius: 0.6rem;
   background-color: var(--white);
 
   text-align: left;
 }
-
 
 /*========== ABOUT ==========*/
 #about {
@@ -346,4 +382,87 @@ body.expanded-menu .close-menu path {
 
 #about .content p {
   margin-bottom: 6rem;
+}
+
+/*========== CONTACT ==========*/
+#contact {
+  text-align: left;
+}
+
+#contact header h2 {
+  margin-bottom: 3.2rem;
+}
+
+#contact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  margin-bottom: 3.2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#contact .button {
+  margin-inline: auto;
+}
+
+#contact .button:hover {
+  background-color: var(--brand-dark);
+}
+
+/*========== FOOTER ==========*/
+footer {
+  background-color: var(--brand);
+  padding-block: 6rem;
+
+  text-align: left;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 2.4rem;
+}
+
+footer .logo svg {
+  width: 23.6rem;
+  height: 3.1rem;
+}
+
+footer .logo path {
+  fill: white;
+}
+
+footer p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2;
+
+  margin-bottom: 3.2rem;
+
+  color: var(--brand-beige);
+}
+
+footer .social-links {
+  justify-content: flex-start;
+}
+
+/*========== BACK TO TOP BUTTON ==========*/
+#backToTopButton {
+  position: fixed;
+  bottom: 0rem;
+  right: 2.5rem;
+
+  visibility: hidden;
+  transform: translateY(100%);
+}
+
+#backToTopButton.show {
+  visibility: visible;
+  transition: 200ms;
+  transform: translateY(-100%);
 }
