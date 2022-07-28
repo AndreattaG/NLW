@@ -6,7 +6,7 @@
 }
 
 :root {
-  --hue: 280;
+  --hue: 180;
 
   --brand-dark: hsl(var(--hue), 100%, 14%);
   --brand: hsl(var(--hue), 100%, 26%);
